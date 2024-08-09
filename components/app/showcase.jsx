@@ -37,7 +37,7 @@ function Images(props) {
     return (
         <div {...props}>
             <Image
-                src="/showcase/showcase_1.png"
+                src="/showcase_1.png"
                 alt="Image 1"
                 width={1370}
                 height={797}
@@ -45,7 +45,7 @@ function Images(props) {
                 style={{objectFit: "cover"}}
             />
             <Image
-                src="/showcase/showcase_1.png"
+                src="/showcase_1.png"
                 alt="Image 1"
                 width={1370}
                 height={797}
@@ -53,7 +53,7 @@ function Images(props) {
                 style={{objectFit: "cover"}}
             />
             <Image
-                src="/showcase/showcase_1.png"
+                src="/showcase_1.png"
                 alt="Image 1"
                 width={1370}
                 height={797}
@@ -61,7 +61,7 @@ function Images(props) {
                 style={{objectFit: "cover"}}
             />
             <Image
-                src="/showcase/showcase_1.png"
+                src="/showcase_1.png"
                 alt="Image 1"
                 width={1370}
                 height={797}
