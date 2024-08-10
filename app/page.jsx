@@ -1,5 +1,5 @@
 import Link from "next/link"
-import {Card, CardContent, CardHeader, CardTitle} from "../components/ui/card"
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "../components/ui/card"
 import Image from "next/image";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "../components/ui/table";
 import Showcase from "../components/app/showcase";
@@ -7,27 +7,34 @@ import Showcase from "../components/app/showcase";
 export default function Component() {
     return (
         <div className="flex flex-col min-h-dvh">
-            <header className="bg-transparent text-primary-foreground py-6 px-4 md:px-6 mb-0 pb-0">
+            <header className="bg-transparent text-primary-foreground py-6 px-4 md:px-6 mb-0 md:pb-0 pb-16">
                 <div className="container mx-auto flex flex-col items-center justify-center">
-                    <h1 className="text-8xl font-bold">FORTUNA</h1>
-                    <h3 className="text-2xl font-bold">GMS Private Server</h3>
+                    <Image src="/logo.png" alt="Logo" width="1000" height="100"/>
                 </div>
-                <nav className="md:flex gap-4 mt-6 items-center justify-center h-16">
+                <nav className="md:flex gap-4 mt-6 items-center justify-center h-16 grid-cols-2 grid">
                     <Link target="_blank" href="https://discord.gg/BWq9u2t8rq" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
                           prefetch={false}>
-                        DISCORD
+                        <h5 className="text-center text-white" style={{
+                            textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
+                        }}>DISCORD</h5>
                     </Link>
                     <Link target="_blank" href="https://discord.gg/BWq9u2t8rq" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
                           prefetch={false}>
-                        REGISTER
+                        <h5 className="text-center text-white" style={{
+                            textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
+                        }}>REGISTER</h5>
                     </Link>
                     <Link target="_blank" href="https://discord.gg/BWq9u2t8rq" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
                           prefetch={false}>
-                        MANAGE ACCOUNT
+                        <h5 className="text-center text-white" style={{
+                            textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
+                        }}>MANAGE ACCOUNT</h5>
                     </Link>
-                    <Link target="_blank" href="https://discord.gg/BWq9u2t8rq" className="text-3xl font-medium hover:underline underline-offset-4 or-"
+                    <Link target="_blank" href="https://discord.gg/BWq9u2t8rq" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
                           prefetch={false}>
-                        DONATE
+                        <h5 className="text-center text-white" style={{
+                            textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
+                        }}>DONATE</h5>
                     </Link>
                 </nav>
             </header>
@@ -35,8 +42,9 @@ export default function Component() {
                 <div className="col-span-1">
                     <Card className="rounded-lg">
                         <CardHeader className="bg-primary">
-                            <CardTitle className="text-center text-5xl text-white"  style={{ textShadow: `3px 0 #004aad, -3px 0 #004aad, 0 3px #004aad, 0 -3px #004aad,
-                                3px 3px #004aad, -3px -3px #004aad, 3px -3px #004aad, -3px 3px #004aad` }}>SERVER INFORMATION</CardTitle>
+                            <CardTitle className="text-center text-5xl text-white text-wrap"  style={{
+                                textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
+                            }}>SERVER INFORMATION</CardTitle>
                         </CardHeader>
                         <CardContent className="grid gap-4">
                             <Table>
@@ -56,31 +64,19 @@ export default function Component() {
                                     <TableRow>
                                         <TableCell className="font-medium"><MesoBagIcon
                                             className="h-12 w-12"/></TableCell>
-                                        <TableCell className="font-medium">Version</TableCell>
-                                        <TableCell className="text-left">v179</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell className="font-medium"><MesoBagIcon
-                                            className="h-12 w-12"/></TableCell>
                                         <TableCell className="font-medium">Rates</TableCell>
                                         <TableCell className="text-left">1x/1x/1x</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
-                            <hr/>
-                            <p className="text-sm text-muted-foreground">
-                                Welcome to Fortuna! Welcome to Fortuna! Welcome to Fortuna! Welcome to Fortuna! Welcome
-                                to Fortuna! Welcome to Fortuna! Welcome to Fortuna! Welcome to Fortuna! Welcome to
-                                Fortuna! Welcome to Fortuna! Welcome to Fortuna! Welcome to Fortuna!
-                            </p>
                         </CardContent>
                     </Card>
                 </div>
                 <div className="col-span-1 md:col-span-2">
                     <Card className="rounded-lg">
                         <CardHeader className="bg-[#aeddff]">
-                            <CardTitle className="text-center text-5xl text-white" style={{ textShadow: `3px 0 #004aad, -3px 0 #004aad, 0 3px #004aad, 0 -3px #004aad,
-                                3px 3px #004aad, -3px -3px #004aad, 3px -3px #004aad, -3px 3px #004aad` }}>NEWS, UPDATES, & EVENTS</CardTitle>
+                            <CardTitle className="text-center text-5xl text-white" style={{ textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44,
+                                3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44` }}>NEWS, UPDATES, & EVENTS</CardTitle>
                         </CardHeader>
                         <CardContent className="flex flex-col gap-4 overflow-y-auto mt-3">
                             <div className="grid gap-2">
@@ -115,20 +111,150 @@ export default function Component() {
                             </div>
                         </CardContent>
                     </Card>
+                    <Card className="rounded-lg mt-6">
+                        <CardHeader className="bg-[#aeddff]">
+                            <CardTitle className="text-center text-3xl md:text-5xl text-white" style={{ textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44,
+                                3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44` }}>FEATURES</CardTitle>
+                        </CardHeader>
+                        <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>MANY CLASSES</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>All classes up to Blaster fully functional!</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>PROFESSIONS</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>MONSTER COLLECTION</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>CHARACTER CARDS</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>CUSTOMIZED CASH SHOP</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>AUCTION HOUSE</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>SOUL WEAPONS</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>BUDDY/GUILD/PARTY SYSTEMS</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>STAR FORCING</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>BOSSES</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>All bosses fully functional up to Lucid and Will!</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>AUTO JOB ADVANCEMENT</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>CUBING</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>BOSS CURRENCY EXCHANGE</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>DOJO</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle>BOSS RUSH</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>Description of feature</CardDescription>
+                                </CardContent>
+                            </Card>
+                        </CardContent>
+                    </Card>
                     <Showcase className="rounded-lg mt-6"/>
                 </div>
                 <div className="col-span-1">
                     <Card className="rounded-lg">
                         <CardHeader className="bg-[#aeddff]">
-                            <CardTitle className="text-center text-5xl text-white" style={{ textShadow: `3px 0 #004aad, -3px 0 #004aad, 0 3px #004aad, 0 -3px #004aad,
-                                3px 3px #004aad, -3px -3px #004aad, 3px -3px #004aad, -3px 3px #004aad` }}>TOP PLAYERS</CardTitle>
+                            <CardTitle className="text-center text-5xl text-white" style={{ textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44,
+                                3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44` }}>TOP PLAYERS</CardTitle>
                         </CardHeader>
                         <CardContent className="grid gap-4 mt-3">
                             <Table className="border">
                                 <TableHeader className="border">
-                                    <TableHead className="border w-40">Character</TableHead>
-                                    <TableHead className="border">Rank</TableHead>
-                                    <TableHead className="border">Name</TableHead>
+                                    <TableRow>
+                                        <TableHead className="border w-40">Character</TableHead>
+                                        <TableHead className="border">Rank</TableHead>
+                                        <TableHead className="border">Name</TableHead>
+                                    </TableRow>
                                 </TableHeader>
                                 <TableBody className="border">
                                     <TableRow className="border">
@@ -180,6 +306,7 @@ function MesoBagIcon(props) {
             alt="Meso"
             width="100"
             height="100"
+            style={{ objectFit: `cover` }}
         />
     )
 }

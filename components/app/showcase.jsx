@@ -14,8 +14,9 @@ export default function Showcase(props) {
         <div>
             <Card {...props}>
                 <CardHeader className="bg-[#aeddff]">
-                    <CardTitle className="text-center text-5xl text-white" style={{ textShadow: `3px 0 #004aad, -3px 0 #004aad, 0 3px #004aad, 0 -3px #004aad,
-                                3px 3px #004aad, -3px -3px #004aad, 3px -3px #004aad, -3px 3px #004aad` }}>SHOWCASE</CardTitle>
+                    <CardTitle className="text-center text-5xl text-white" style={{
+                        textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
+                    }}>SHOWCASE</CardTitle>
                 </CardHeader>
                 <CardContent className="mt-4" onClick={() => setOpen(true)}>
                     <Images className="flex overflow-x-auto min-w-full gap-6 h-auto"/>
