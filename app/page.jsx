@@ -42,7 +42,7 @@ export default function Component() {
                 <div className="col-span-1">
                     <Card className="rounded-lg">
                         <CardHeader className="bg-primary">
-                            <CardTitle className="text-center text-5xl text-white text-wrap"  style={{
+                            <CardTitle className="text-center text-3xl md:text-5xl text-white [overflow-wrap:anywhere]"  style={{
                                 textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
                             }}>SERVER INFORMATION</CardTitle>
                         </CardHeader>
@@ -75,7 +75,7 @@ export default function Component() {
                 <div className="col-span-1 md:col-span-2">
                     <Card className="rounded-lg">
                         <CardHeader className="bg-[#aeddff]">
-                            <CardTitle className="text-center text-5xl text-white" style={{ textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44,
+                            <CardTitle className="text-center text-3xl md:text-5xl text-white" style={{ textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44,
                                 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44` }}>NEWS, UPDATES, & EVENTS</CardTitle>
                         </CardHeader>
                         <CardContent className="flex flex-col gap-4 overflow-y-auto mt-3">
@@ -244,7 +244,7 @@ export default function Component() {
                 <div className="col-span-1">
                     <Card className="rounded-lg">
                         <CardHeader className="bg-[#aeddff]">
-                            <CardTitle className="text-center text-5xl text-white" style={{ textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44,
+                            <CardTitle className="text-center text-3xl md:text-5xl text-white" style={{ textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44,
                                 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44` }}>TOP PLAYERS</CardTitle>
                         </CardHeader>
                         <CardContent className="grid gap-4 mt-3">

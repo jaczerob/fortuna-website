@@ -14,7 +14,7 @@ export default function Showcase(props) {
         <div>
             <Card {...props}>
                 <CardHeader className="bg-[#aeddff]">
-                    <CardTitle className="text-center text-5xl text-white" style={{
+                    <CardTitle className="text-center text-3xl md:text-5xl text-white" style={{
                         textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
                     }}>SHOWCASE</CardTitle>
                 </CardHeader>
