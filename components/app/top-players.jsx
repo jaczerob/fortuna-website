@@ -3,9 +3,19 @@
 import {Card, CardContent, CardHeader, CardTitle} from "../ui/card";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "../ui/table";
 import {useEffect, useState} from "react";
+import {Skeleton} from "../ui/skeleton";
+import {randomUUID} from "crypto";
 
 export default function TopPlayers(props) {
     const [rankings, setRankings] = useState([]);
+    const placeHolderPlayers = [
+        { name: '', rank: '1', level: '' },
+        { name: '', rank: '2', level: '' },
+        { name: '', rank: '3', level: '' },
+        { name: '', rank: '4', level: '' },
+        { name: '', rank: '5', level: '' },
+    ]
+
     useEffect(() => {
         let mounted = true;
         fetch('https://api.fortunams.org:8080/api/server/rankings')
@@ -34,15 +44,27 @@ export default function TopPlayers(props) {
                         </TableRow>
                     </TableHeader>
                     <TableBody className="border">
-                        { rankings.map(player => {
+                        { rankings != null && rankings.length !== 0 ? rankings.map(player => {
                             return (
                                 <Player key={player.name} rank={player.rank} name={player.name} level={player.level}/>
+                            )
+                        }) : placeHolderPlayers.map(player => {
+                            return (
+                                <SkeletonPlayer key={player.rank} className="w-[100px] h-[20px] rounded-full" />
                             )
                         })}
                     </TableBody>
                 </Table>
             </CardContent>
         </Card>
+    );
+}
+
+function SkeletonPlayer(props) {
+    return (
+        <TableRow {...props}>
+            <TableCell className="border" colSpan={3}><Skeleton>Loading...</Skeleton></TableCell>
+        </TableRow>
     );
 }
 
