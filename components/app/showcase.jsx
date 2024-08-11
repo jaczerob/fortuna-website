@@ -2,21 +2,17 @@
 
 import Image from "next/image";
 import {useState} from "react";
-import {useRouter} from "next/navigation";
-import {DialogContent, DialogHeader, DialogTitle, Dialog} from "../ui/dialog";
+import {Dialog, DialogContent, DialogHeader, DialogTitle} from "../ui/dialog";
 import {Card, CardContent, CardHeader, CardTitle} from "../ui/card";
 
 export default function Showcase(props) {
-    const router = useRouter();
     const [open, setOpen] = useState(false);
 
     return (
         <div>
             <Card {...props}>
                 <CardHeader className="bg-[#aeddff]">
-                    <CardTitle className="text-center text-3xl md:text-5xl text-white" style={{
-                        textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
-                    }}>SHOWCASE</CardTitle>
+                    <CardTitle className="fortuna-header">SHOWCASE</CardTitle>
                 </CardHeader>
                 <CardContent className="mt-4" onClick={() => setOpen(true)}>
                     <Images className="flex overflow-x-auto min-w-full gap-6 h-auto"/>
@@ -45,30 +41,34 @@ function Images(props) {
                 className="object-cover"
                 style={{objectFit: "cover"}}
             />
-            <Image
-                src="/showcase_1.png"
-                alt="Image 1"
-                width={1370}
-                height={797}
-                className="object-cover"
-                style={{objectFit: "cover"}}
-            />
-            <Image
-                src="/showcase_1.png"
-                alt="Image 1"
-                width={1370}
-                height={797}
-                className="object-cover"
-                style={{objectFit: "cover"}}
-            />
-            <Image
-                src="/showcase_1.png"
-                alt="Image 1"
-                width={1370}
-                height={797}
-                className="object-cover"
-                style={{objectFit: "cover"}}
-            />
+            <video
+                muted="true"
+                autoPlay="true"
+                controls
+            >
+                <source src="/Magnus.mp4" type="video/mp4"/>
+            </video>
+            <video
+                muted="true"
+                autoPlay="true"
+                controls
+            >
+                <source src="/auction_house.mp4" type="video/mp4"/>
+            </video>
+            <video
+                muted="true"
+                autoPlay="true"
+                controls
+            >
+                <source src="/Pgach2.mp4" type="video/mp4"/>
+            </video>
+            <video
+                muted="true"
+                autoPlay="true"
+                controls
+            >
+                <source src="/surprise_style_nx_box.mp4" type="video/mp4"/>
+            </video>
         </div>
     )
 }

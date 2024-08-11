@@ -26,4 +26,17 @@
 
 .bg-card {
   background-color: rgba(255, 255, 255, 0.7);
+  @apply border-transparent;
+}
+
+.fortuna-header {
+  @apply text-center text-3xl md:text-5xl text-white;
+  text-shadow: 3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44;
+  overflow-wrap: anywhere;
+}
+
+.fortuna-header-small {
+  @apply text-center text-xl md:text-3xl text-white;
+  overflow-wrap: anywhere;
+  text-shadow: 3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44;
 }
