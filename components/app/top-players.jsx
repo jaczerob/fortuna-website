@@ -1,8 +1,24 @@
+"use client"
+
 import {Card, CardContent, CardHeader, CardTitle} from "../ui/card";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "../ui/table";
-import Image from "next/image";
+import {useEffect, useState} from "react";
 
 export default function TopPlayers(props) {
+    const [rankings, setRankings] = useState([]);
+    useEffect(() => {
+        let mounted = true;
+        fetch('https://api.fortunams.org:8080/api/server/rankings')
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+                setRankings(json.rankings);
+            })
+            .catch(err => console.log(err.message));
+
+        return () => mounted = false;
+    }, []);
+
     return (
         <Card {...props}>
             <CardHeader className="bg-[#aeddff]">
@@ -12,17 +28,17 @@ export default function TopPlayers(props) {
                 <Table className="border">
                     <TableHeader className="border">
                         <TableRow>
-                            <TableHead className="border w-40">Character</TableHead>
                             <TableHead className="border">Rank</TableHead>
                             <TableHead className="border">Name</TableHead>
+                            <TableHead className="border">Level</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody className="border">
-                        <Player rank="1" name="Jacob" top="true" level="200" job="Mechanic"/>
-                        <Player rank="2" name="Jacob" level="200" job="Mechanic"/>
-                        <Player rank="3" name="Jacob" level="200" job="Mechanic"/>
-                        <Player rank="4" name="Jacob" level="200" job="Mechanic"/>
-                        <Player rank="5" name="Jacob" level="200" job="Mechanic"/>
+                        { rankings.map(player => {
+                            return (
+                                <Player key={player.name} rank={player.rank} name={player.name} level={player.level}/>
+                            )
+                        })}
                     </TableBody>
                 </Table>
             </CardContent>
@@ -33,21 +49,19 @@ export default function TopPlayers(props) {
 function Player(props) {
     return (
         <TableRow>
-            {props.top &&
-                <TableCell className="font-medium border" rowSpan="5">
-                    <Image
-                        src="https://msavatar1.nexon.net/Character/NPKPBLAJCINFFBLGCNIOGKONOCKNGLPIFKFOABOKKPPKGDBKLEIAKGEBENJMFBCNMDPLDJIPBDHAOLHDLECCHPFMMGHGACKBPBCMONKMOPOCGLOJEKCCKONOJBFBGOGFGIBKCPHKGKFAJNFBFJHKMMBHDGADCLLPFBHICOCLOCCKPBCBEELMAAGEPBPPKNJIBBBENMHECDMHBLMHLMONKJEFIINDIMEDECGICHMLEAAFAKBGKOJOKMAKIJKIKCBD.png"
-                        alt="jacobolivia"
-                        width="100"
-                        height="100"
-                    />
-                    <hr/>
-                    Lv. {props.level}<br/>
-                    Job: {props.job}
-                </TableCell>
-            }
-            <TableCell className="font-medium border">{props.rank}</TableCell>
+            <TableCell className="border">{props.rank}</TableCell>
             <TableCell className="border">{props.name}</TableCell>
+            <TableCell className="border">{props.level}</TableCell>
         </TableRow>
     );
+}
+
+async function fetchPlayers() {
+    const response= await fetch('http://95.216.153.56:8080/server/rankings');
+    if (!response.ok) {
+        response.text().then(console.error);
+        return null;
+    }
+
+    return await response.json();
 }

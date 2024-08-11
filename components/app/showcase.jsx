@@ -42,32 +42,32 @@ function Images(props) {
                 style={{objectFit: "cover"}}
             />
             <video
-                muted="true"
-                autoPlay="true"
+                muted={true}
+                autoPlay={true}
                 controls
                 loop
             >
                 <source src="/Magnus.mp4" type="video/mp4"/>
             </video>
             <video
-                muted="true"
-                autoPlay="true"
+                muted={true}
+                autoPlay={true}
                 controls
                 loop
             >
                 <source src="/auction_house.mp4" type="video/mp4"/>
             </video>
             <video
-                muted="true"
-                autoPlay="true"
+                muted={true}
+                autoPlay={true}
                 controls
                 loop
             >
                 <source src="/Pgach2.mp4" type="video/mp4"/>
             </video>
             <video
-                muted="true"
-                autoPlay="true"
+                muted={true}
+                autoPlay={true}
                 controls
                 loop
             >
