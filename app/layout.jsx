@@ -35,9 +35,16 @@ export default function Layout({ children }) {
             <meta property="og:image" content="https://fortunams.org/logo.png"/>
             <meta property="og:locale" content="en_US"/>
 
+            <meta name="twitter:site" content="Fortuna"/>
+            <meta name="twitter:title" content="Fortuna"/>
+            <meta name="twitter:description" content="v179 MapleStory Private Server"/>
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:image:src" content="https://fortunams.org/logo.png"/>
+
             <meta name="description" content="v179 MapleStory Private Server"/>
             <meta name="author" content="jaczerob"/>
             <meta name="keywords" content="fortuna, maplestory, v179, 5th job, gms, private server, maplestory private server"/>
+            <meta name="theme-color" content="#E2BC44"/>
         </head>
         <body
             className={cn(
