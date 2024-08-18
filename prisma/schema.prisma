@@ -1,0 +1,1108 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../components/generated/client-mysql"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model accounts {
+  id                  Int  @id @default(autoincrement())
+  worldid             Int?
+  userid              Int?
+  trunkid             Int?
+  nxCredit            Int? @default(0)
+  monstercollectionid Int?
+  employeetrunkid     Int?
+
+  @@index([monstercollectionid], map: "monstercollectionid")
+  @@index([trunkid], map: "trunkid")
+  @@index([userid], map: "userid")
+}
+
+model alliance_gradenames {
+  id         Int     @id @default(autoincrement())
+  gradename  String? @db.VarChar(255)
+  allianceid Int?
+
+  @@index([allianceid], map: "allianceid")
+}
+
+model alliances {
+  id           Int     @id @default(autoincrement())
+  name         String? @db.VarChar(255)
+  maxmembernum Int?
+  notice       String? @db.VarChar(255)
+}
+
+model auction_histories {
+  id          Int       @id @default(autoincrement())
+  itemid      Int?
+  bargain     Boolean?
+  refund      Boolean?
+  ownerid     Int?
+  ownername   String?   @db.VarChar(255)
+  historytype Int?
+  mesos       BigInt?
+  buyer       Int?
+  bid         BigInt?
+  expiredtime DateTime?
+  buytime     DateTime?
+  starttime   DateTime?
+}
+
+model auction_items {
+  id          Int       @id @default(autoincrement())
+  itemid      Int?
+  bargain     Boolean?
+  ownerid     Int?
+  ownername   String?   @db.VarChar(255)
+  mesos       BigInt?
+  buyer       Int?
+  bid         BigInt?
+  expiredtime DateTime?
+  starttime   DateTime?
+}
+
+model avatardata {
+  id             Int  @id @default(autoincrement())
+  characterstat  Int?
+  avatarlook     Int?
+  zeroavatarlook Int?
+
+  @@index([avatarlook], map: "avatarlook")
+  @@index([characterstat], map: "characterstat")
+  @@index([zeroavatarlook], map: "zeroavatarlook")
+}
+
+model avatarlook {
+  id                    Int      @id @default(autoincrement())
+  gender                Int?
+  skin                  Int?
+  face                  Int?
+  hair                  Int?
+  weaponstickerid       Int?
+  weaponid              Int?
+  subweaponid           Int?
+  job                   Int?
+  drawelfear            Boolean?
+  demonslayerdeffaceacc Int?
+  xenondeffaceacc       Int?
+  beasttamerdeffaceacc  Int?
+  iszerobetalook        Boolean?
+  mixedhaircolor        Int?
+  mixhairpercent        Int?
+  ears                  Int?
+  tail                  Int?
+}
+
+model bbs_records {
+  id           Int       @id @default(autoincrement())
+  idforbbs     Int?
+  creatorid    Int?
+  subject      String?   @db.VarChar(255)
+  msg          String?   @db.Text
+  creationdate DateTime?
+  icon         Int?
+  guildid      Int?
+}
+
+model bbs_replies {
+  id           Int       @id @default(autoincrement())
+  idforreply   Int?
+  creatorid    Int?
+  creationdate DateTime?
+  msg          String?   @db.Text
+  recordid     Int?
+
+  @@index([recordid], map: "recordid")
+}
+
+model beautydata {
+  id         Int    @id @default(autoincrement())
+  charID     Int    @default(0)
+  hairSize   Int    @default(0)
+  faceSize   Int    @default(0)
+  hairString String @db.Text
+  faceString String @db.Text
+}
+
+model bosslog {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  accountid   Int      @db.UnsignedInt
+  bossid      String   @db.VarChar(20)
+  lastattempt DateTime @default(now()) @db.Timestamp(0)
+  pqentry     Int      @default(0) @db.UnsignedInt
+}
+
+model cashiteminfos {
+  id             BigInt   @id @default(autoincrement())
+  accountid      Int?
+  characterid    Int?
+  commodityid    Int?
+  buycharacterid String?  @db.VarChar(255)
+  paybackrate    Int?
+  discount       Float?
+  orderno        Int?
+  productno      Int?
+  refundable     Boolean?
+  sourceflag     Int?     @db.TinyInt
+  storebank      Boolean?
+  itemid         Int?
+  trunkid        Int?
+  position       Int?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model charactercards {
+  accid       Int? @db.UnsignedInt
+  characterid Int?
+  position    Int?
+
+  @@ignore
+}
+
+model characterpotentials {
+  id      BigInt @id @default(autoincrement())
+  potkey  Int?   @db.TinyInt
+  skillid Int?
+  slv     Int?   @db.TinyInt
+  grade   Int?   @db.TinyInt
+  charid  Int?
+
+  @@index([charid], map: "charid")
+}
+
+model characters {
+  id                Int     @id @default(autoincrement())
+  accid             Int?
+  orderid           Int?
+  avatardata        Int?
+  equippedinventory Int?
+  equipinventory    Int?
+  consumeinventory  Int?
+  etcinventory      Int?
+  installinventory  Int?
+  cashinventory     Int?
+  funckeymap_id     Int?
+  fieldid           Int?
+  questmanager      BigInt?
+  guild             Int?
+  rewardPoints      Int?
+  monsterbook       Int?
+  party             Int?
+  medalid           Int?
+  monsterparkcount  Int?    @default(0) @db.TinyInt
+  previousFieldID   BigInt?
+  onlineDay         Int?    @default(0)
+  onlineTime        BigInt? @default(0)
+  quickslotKeys     String? @db.VarChar(255)
+
+  @@index([avatardata], map: "avatardata")
+  @@index([cashinventory], map: "cashinventory")
+  @@index([consumeinventory], map: "consumeinventory")
+  @@index([equipinventory], map: "equipinventory")
+  @@index([equippedinventory], map: "equippedinventory")
+  @@index([etcinventory], map: "etcinventory")
+  @@index([funckeymap_id], map: "funckeymap_id")
+  @@index([guild], map: "guild")
+  @@index([installinventory], map: "installinventory")
+  @@index([monsterbook], map: "monsterbook")
+  @@index([questmanager], map: "questmanager")
+}
+
+model characterstats {
+  id                    Int       @id @default(autoincrement())
+  characterid           Int?
+  characteridforlog     Int?
+  worldidforlog         Int?
+  name                  String?   @db.VarChar(255)
+  gender                Int?
+  skin                  Int?
+  face                  Int?
+  hair                  Int?
+  mixbasehaircolor      Int?
+  mixaddhaircolor       Int?
+  mixhairbaseprob       Int?
+  level                 Int?
+  job                   Int?
+  str                   Int?
+  dex                   Int?
+  inte                  Int?
+  luk                   Int?
+  hp                    Int?
+  maxhp                 Int?
+  mp                    Int?
+  maxmp                 Int?
+  ap                    Int?
+  sp                    Int?
+  exp                   String?   @db.MediumText
+  pop                   Int?
+  money                 String?   @db.MediumText
+  wp                    Int?
+  extendsp              Int?
+  posmap                String?   @db.MediumText
+  portal                Int?
+  subjob                Int?
+  deffaceacc            Int?
+  fatigue               Int?
+  lastfatigueupdatetime Int?
+  charismaexp           Int?
+  insightexp            Int?
+  willexp               Int?
+  craftexp              Int?
+  senseexp              Int?
+  charmexp              Int?
+  noncombatstatdaylimit Int?
+  mcpoint               Int?
+  pvpexp                Int?
+  pvpgrade              Int?
+  pvppoint              Int?
+  pvpmodelevel          Int?
+  pvpmodetype           Int?
+  eventpoint            Int?
+  albaactivityid        Int?
+  albastarttime         DateTime?
+  albaduration          Int?
+  albaspecialreward     Int?
+  burning               Boolean?
+  charactercard         Int?
+  accountlastlogout     Int?
+  lastlogout            DateTime?
+  gachexp               Int?
+  honorexp              Int?
+  nextavailablefametime DateTime?
+  node_shards           Int       @default(0)
+  maxfriends            Int       @default(0)
+
+  @@index([accountlastlogout], map: "accountlastlogout")
+  @@index([charactercard], map: "charactercard")
+  @@index([extendsp], map: "extendsp")
+  @@index([noncombatstatdaylimit], map: "noncombatstatdaylimit")
+}
+
+model chosenskills {
+  id       Int  @id @default(autoincrement())
+  charid   Int?
+  skillid  Int?
+  position Int?
+
+  @@index([charid], map: "charid")
+}
+
+model cms_votes {
+  id        Int      @id @default(autoincrement())
+  accountid Int
+  ip        String   @db.Text
+  time      DateTime @default(now()) @db.Timestamp(0)
+  vp        Int
+  collected Int
+}
+
+model cooldowns {
+  id            Int      @id @default(autoincrement())
+  player_name   String   @db.VarChar(255)
+  cooldown_type Int
+  expiry_time   DateTime @db.DateTime(0)
+}
+
+model cores {
+  id        Int  @id @default(autoincrement())
+  pos       Int?
+  charid    Int?
+  slottype  Int?
+  coreid    Int?
+  leftCount Int?
+}
+
+model cs_categories {
+  id        Int     @id @default(autoincrement())
+  idx       Int?
+  name      String? @db.VarChar(255)
+  flag      Int?
+  parentIdx Int?    @default(0)
+  stock     Int?    @default(100)
+}
+
+model cs_items {
+  id                     Int       @id @default(autoincrement())
+  itemID                 Int
+  stock                  Int?      @default(1)
+  shopItemFlag           Int?      @default(0)
+  idk1                   Int?      @default(0)
+  idk2                   Int?      @default(0)
+  oldPrice               Int?      @default(0)
+  newPrice               Int?      @default(0)
+  idkTime1               DateTime?
+  saleFromFT             DateTime?
+  idkTime3               DateTime?
+  saleToFT               DateTime?
+  idk3                   Int?      @default(0)
+  bundleQuantity         Int?      @default(0)
+  availableDays          Int?      @default(0)
+  buyableWithMaplePoints Int?      @default(1) @db.SmallInt
+  buyableWithCredit      Int?      @default(1) @db.SmallInt
+  buyableWithPrepaid     Int?      @default(1) @db.SmallInt
+  likable                Int?      @default(1) @db.SmallInt
+  meso                   Int?      @default(0) @db.SmallInt
+  favoritable            Int?      @default(1) @db.SmallInt
+  gender                 Int?      @default(2)
+  likes                  Int?      @default(0)
+  requiredLevel          Int?      @default(0)
+  idk10                  String?   @db.VarChar(255)
+  idk11                  Int?      @default(0)
+  idk13                  Int?      @default(0)
+  idk14                  Int?      @default(0)
+  category               String?   @db.VarChar(255)
+}
+
+model damageskins {
+  id           BigInt   @id @default(autoincrement())
+  charid       Int?
+  damageskinid Int?
+  itemid       Int?
+  notsave      Boolean?
+  description  String?  @db.VarChar(255)
+
+  @@index([charid], map: "accid")
+}
+
+model employeetrunk {
+  id    Int     @id @default(autoincrement())
+  money BigInt? @default(0)
+}
+
+model equips {
+  serialnumber         BigInt?
+  itemid               BigInt    @id
+  title                String?   @db.VarChar(255)
+  equippeddate         DateTime?
+  prevbonusexprate     Int?
+  options              String?   @db.VarChar(255)
+  sockets              String?   @db.VarChar(255)
+  tuc                  Int?      @db.SmallInt
+  cuc                  Int?      @db.SmallInt
+  istr                 Int?      @db.SmallInt
+  idex                 Int?      @db.SmallInt
+  iint                 Int?      @db.SmallInt
+  iluk                 Int?      @db.SmallInt
+  imaxhp               Int?      @db.SmallInt
+  imaxhpr              Int       @db.SmallInt
+  imaxmp               Int?      @db.SmallInt
+  imaxmpr              Int       @db.SmallInt
+  ipad                 Int?      @db.SmallInt
+  imad                 Int?      @db.SmallInt
+  ipdd                 Int?      @db.SmallInt
+  imdd                 Int?      @db.SmallInt
+  iacc                 Int?      @db.SmallInt
+  ieva                 Int?      @db.SmallInt
+  icraft               Int?      @db.SmallInt
+  ispeed               Int?      @db.SmallInt
+  ijump                Int?      @db.SmallInt
+  arcaneid             BigInt?
+  attribute            Int?      @db.SmallInt
+  leveluptype          Int?      @db.SmallInt
+  level                Int?      @db.SmallInt
+  exp                  Int?      @db.SmallInt
+  durability           Int?      @db.SmallInt
+  iuc                  Int?      @db.SmallInt
+  ipvpdamage           Int?      @db.SmallInt
+  ireducereq           Int?      @db.SmallInt
+  specialattribute     Int?      @db.SmallInt
+  durabilitymax        Int?      @db.SmallInt
+  iincreq              Int?      @db.SmallInt
+  growthenchant        Int?      @db.SmallInt
+  psenchant            Int?      @db.SmallInt
+  hyperupgrade         Int?      @db.SmallInt
+  bdr                  Int?      @db.SmallInt
+  imdr                 Int?      @db.SmallInt
+  damr                 Int?      @db.SmallInt
+  statr                Int?      @db.SmallInt
+  cuttable             Int?      @db.SmallInt
+  exgradeoption        BigInt?
+  itemstate            Int?      @db.SmallInt
+  grade                Int?      @db.SmallInt
+  chuc                 Int?      @db.SmallInt
+  souloptionid         Int?      @db.SmallInt
+  soulsocketid         Int?      @db.SmallInt
+  souloption           Int?      @db.SmallInt
+  soulitemid           Int?
+  rstr                 Int?      @db.SmallInt
+  rdex                 Int?      @db.SmallInt
+  rint                 Int?      @db.SmallInt
+  rluk                 Int?      @db.SmallInt
+  rlevel               Int?      @db.SmallInt
+  rjob                 Int?      @db.SmallInt
+  rpop                 Int?      @db.SmallInt
+  specialgrade         Int?
+  fixedpotential       Boolean?
+  tradeblock           Boolean?
+  isonly               Boolean?
+  notsale              Boolean?
+  attackspeed          Int?
+  price                Int?
+  charmexp             Int?
+  setitemid            Int?
+  exitem               Boolean?
+  equiptradeblock      Boolean?
+  islot                String?   @db.VarChar(255)
+  vslot                String?   @db.VarChar(255)
+  fixedgrade           Int?
+  nopotential          Int?      @db.TinyInt
+  bossreward           Int?      @db.TinyInt
+  superioreqp          Int?      @db.TinyInt
+  flameid              BigInt?
+  android              Int?
+  androidgrade         Int?
+  arcane_stat          Int?      @default(0) @db.SmallInt
+  arcane_exp           Int?      @default(0)
+  arcane_level         Int?      @default(0)
+  flame_str            Int?      @default(0) @db.SmallInt
+  flame_dex            Int?      @default(0) @db.SmallInt
+  flame_int            Int?      @default(0) @db.SmallInt
+  flame_luk            Int?      @default(0) @db.SmallInt
+  flame_pad            Int?      @default(0) @db.SmallInt
+  flame_mad            Int?      @default(0) @db.SmallInt
+  flame_pdd            Int?      @default(0) @db.SmallInt
+  flame_hp             Int?      @default(0) @db.SmallInt
+  flame_mp             Int?      @default(0) @db.SmallInt
+  flame_speed          Int?      @default(0) @db.SmallInt
+  flame_jump           Int?      @default(0) @db.SmallInt
+  flame_allStatR       Int?      @default(0) @db.SmallInt
+  flame_bossDamageR    Int?      @default(0) @db.SmallInt
+  flame_damageR        Int?      @default(0) @db.SmallInt
+  flame_reduceReqLevel Int?      @default(0) @db.SmallInt
+}
+
+model eventnametag {
+  id           Int    @id @default(autoincrement())
+  charid       Int    @default(0)
+  activeRed    Int    @default(-1) @db.TinyInt
+  activeBlue   Int    @default(-1) @db.TinyInt
+  activeYellow Int    @default(-1) @db.TinyInt
+  activeGreen  Int    @default(-1) @db.TinyInt
+  activePurple Int    @default(-1) @db.TinyInt
+  sRed         String @default("0000000000") @db.VarChar(10)
+  sBlue        String @default("0000000000") @db.VarChar(10)
+  sYellow      String @default("0000000000") @db.VarChar(10)
+  sGreen       String @default("0000000000") @db.VarChar(10)
+  sPurple      String @default("0000000000") @db.VarChar(10)
+}
+
+model extendsp {
+  id Int @id @default(autoincrement())
+}
+
+model familiars {
+  id         BigInt    @id @default(autoincrement())
+  charid     Int?
+  idk1       Int?
+  familiarid Int?
+  name       String?   @db.VarChar(13)
+  idk2       Boolean?
+  idk3       Int?      @db.SmallInt
+  fatigue    Int?
+  idk4       BigInt?
+  idk5       BigInt?
+  expiration DateTime?
+  vitality   Int?      @db.SmallInt
+
+  @@index([charid], map: "charid")
+}
+
+model friends {
+  id              Int     @id @default(autoincrement())
+  ownerid         Int?
+  owneraccid      Int?
+  friendid        Int?
+  friendaccountid Int?
+  name            String? @db.VarChar(255)
+  flag            Int?    @db.TinyInt
+  groupname       String? @db.VarChar(255)
+  mobile          Int?    @db.TinyInt
+  nickname        String? @db.VarChar(255)
+  memo            String? @db.VarChar(255)
+}
+
+model funckeymap {
+  id     Int  @id @default(autoincrement())
+  charId Int?
+  ord    Int?
+}
+
+model gradenames {
+  id        Int     @id @default(autoincrement())
+  gradename String? @db.VarChar(255)
+  guildid   Int?
+
+  @@index([guildid], map: "guildid")
+}
+
+model guildmembers {
+  id                Int       @id @default(autoincrement())
+  charid            Int?
+  guildid           Int?
+  grade             Int?
+  alliancegrade     Int?
+  commitment        Int?
+  daycommitment     Int?
+  igp               Int?
+  commitmentinctime DateTime?
+  name              String?   @db.VarChar(255)
+  job               Int?
+  level             Int?
+  loggedin          Boolean?
+
+  @@index([guildid], map: "guildid")
+}
+
+model guildrequestors {
+  id            Int      @id @default(autoincrement())
+  requestors_id Int?
+  charid        Int?
+  guildid       Int?
+  name          String?  @db.VarChar(255)
+  job           Int?
+  level         Int?
+  loggedin      Boolean?
+
+  @@index([guildid], map: "guildid")
+}
+
+model guilds {
+  id            Int      @id @default(autoincrement())
+  name          String?  @db.VarChar(255)
+  leaderid      Int?
+  worldid       Int?
+  markbg        Int?
+  markbgcolor   Int?
+  mark          Int?
+  markcolor     Int?
+  maxmembers    Int?
+  notice        String?  @db.VarChar(255)
+  points        Int?
+  seasonpoints  Int?
+  allianceid    Int?
+  level         Int?
+  guildrank     Int?
+  ggp           Int?
+  appliable     Boolean?
+  joinsetting   Int?
+  reqlevel      Int?
+  bbsNotice     Int?
+  battleSp      Int?
+  fk_allianceid Int?
+}
+
+model guildskill {
+  id                  Int       @id @default(autoincrement())
+  skillid             Int?
+  level               Int?
+  expiredate          DateTime?
+  buycharactername    String?   @db.VarChar(255)
+  extendcharactername String?   @db.VarChar(255)
+}
+
+model guildskills {
+  guildskill_id   Int  @id @default(autoincrement())
+  skills_id       Int?
+  guild_id        Int?
+  skillid         Int?
+  fk_guildskillid Int?
+
+  @@index([fk_guildskillid], map: "fk_guildskillid")
+  @@index([guild_id], map: "guild_id")
+}
+
+model hairequips {
+  id      Int  @id @default(autoincrement())
+  alid    Int?
+  equipid Int?
+
+  @@index([alid], map: "alid")
+}
+
+model hyperrockfields {
+  id      BigInt @id @default(autoincrement())
+  charid  Int?
+  ord     Int?
+  fieldid Int?
+
+  @@index([charid], map: "charid")
+}
+
+model inventories {
+  id    Int  @id @default(autoincrement())
+  type  Int?
+  slots Int? @db.SmallInt
+}
+
+model items {
+  id                   BigInt    @id @default(autoincrement())
+  inventoryid          Int?
+  trunkid              Int?
+  auctionHouseStatus   Boolean?  @default(false)
+  itemid               Int?
+  bagindex             Int?
+  cashitemserialnumber BigInt?
+  dateexpire           DateTime?
+  invtype              Int?
+  type                 Int?
+  iscash               Boolean?
+  quantity             Int?
+  expireonlogout       Boolean?  @default(false)
+  owner                String?   @db.VarChar(255)
+  obtainedonce         Boolean?  @default(false)
+  zeroShareItemID      BigInt    @default(0)
+  attribute            Int?      @default(0) @db.SmallInt
+}
+
+model itemsbuylimit {
+  id           Int     @id @default(autoincrement())
+  shopitemid   BigInt?
+  charid       Int?
+  amountbought Int?
+
+  @@index([charid], map: "charid")
+  @@index([shopitemid], map: "shopitemid")
+}
+
+model keymaps {
+  id      Int  @id @default(autoincrement())
+  fkmapid Int?
+  idx     Int?
+  type    Int? @db.TinyInt
+  val     Int?
+
+  @@index([fkmapid], map: "fkmapid")
+}
+
+model linkskills {
+  id           Int       @id @default(autoincrement())
+  accid        Int?
+  ownerid      Int?
+  linkedcharid Int?
+  linkskillid  Int?
+  level        Int?
+  addeddate    DateTime?
+
+  @@index([accid], map: "accid")
+}
+
+model macros {
+  id     BigInt   @id @default(autoincrement())
+  charid Int?
+  muted  Boolean?
+  name   String?  @db.VarChar(255)
+
+  @@index([charid], map: "charid")
+}
+
+model macroskills {
+  id       BigInt  @id @default(autoincrement())
+  ordercol Int?
+  skillid  Int?
+  macroid  BigInt?
+
+  @@index([macroid], map: "macroid")
+}
+
+model matrixskill {
+  id         Int     @id @default(autoincrement())
+  charid     Int     @default(0)
+  state      Boolean @default(false)
+  coreID     Int     @default(0)
+  skillID1   Int     @default(0)
+  skillID2   Int     @default(0)
+  skillID3   Int     @default(0)
+  level      Int     @default(0)
+  maxLevel   Int     @default(0)
+  experience Int     @default(0)
+  crc        BigInt  @default(0)
+  slot       Int     @default(-1)
+}
+
+model medals {
+  id            BigInt    @id @default(autoincrement())
+  charid        Int?
+  questid       Int?
+  itemid        Int?
+  completedtime DateTime?
+}
+
+model mob_drops {
+  id          BigInt @id @default(autoincrement())
+  mobid       Int?
+  itemid      Int?
+  chance      Int?
+  minquant    Int?   @default(1)
+  maxquant    Int?   @default(1)
+  reactordrop Int?   @db.SmallInt
+}
+
+model monster_collection {
+  id       Int  @id @default(autoincrement())
+  mobid    Int?
+  region   Int?
+  session  Int?
+  position Int?
+}
+
+model monster_collection_explorations {
+  id            BigInt    @id @default(autoincrement())
+  collectionid  Int?
+  collectionkey Int?
+  monsterkey    String?   @db.VarChar(255)
+  endDate       DateTime?
+  position      Int?
+}
+
+model monster_collection_group_rewards {
+  region   Int
+  session  Int
+  groupid  Int
+  rewardid Int?
+  quantity Int?
+
+  @@id([region, session, groupid])
+}
+
+model monster_collection_mobs {
+  id           Int  @id @default(autoincrement())
+  collectionid Int?
+  mobid        Int?
+}
+
+model monster_collection_rewards {
+  region       Int
+  session      Int
+  groupid      Int
+  collectionid Int?
+
+  @@id([region, session, groupid])
+}
+
+model monster_collection_session_rewards {
+  region   Int
+  session  Int
+  rewardid Int?
+  quantity Int?
+
+  @@id([region, session])
+}
+
+model monster_collections {
+  id         Int @id @default(autoincrement())
+  templateid Int @default(0)
+  accid      Int @default(0)
+}
+
+model monsterbookcards {
+  id     BigInt @id @default(autoincrement())
+  bookid Int?
+  cardid Int?
+
+  @@index([bookid], map: "bookid")
+}
+
+model monsterbookinfos {
+  id      Int  @id @default(autoincrement())
+  setid   Int?
+  coverid Int?
+}
+
+model noncombatstatdaylimit {
+  id                      Int       @id @default(autoincrement())
+  charisma                Int?      @db.SmallInt
+  charm                   Int?      @db.SmallInt
+  insight                 Int?      @db.SmallInt
+  will                    Int?      @db.SmallInt
+  craft                   Int?      @db.SmallInt
+  sense                   Int?      @db.SmallInt
+  lastupdatecharmbycashpr DateTime?
+  charmbycashpr           Int?      @db.TinyInt
+}
+
+model npc {
+  id    Int  @id @default(autoincrement())
+  npcid Int?
+  mapid Int?
+  x     Int?
+  y     Int?
+  cy    Int?
+  rx0   Int?
+  rx1   Int?
+  fh    Int?
+}
+
+model offense_managers {
+  id     Int  @id @default(autoincrement())
+  points Int?
+}
+
+model offenses {
+  id             BigInt    @id @default(autoincrement())
+  manager_id     Int?
+  charid         Int?
+  accountid      Int?
+  msg            String?   @db.Text
+  type           String?   @db.VarChar(255)
+  issuedate      DateTime?
+  issuer_char_id Int?
+
+  @@index([manager_id], map: "manager_id")
+}
+
+model party {
+  id             Int      @id @default(autoincrement())
+  name           String?  @db.VarChar(255)
+  partyleaderid  Int?
+  appliable      Boolean?
+  isprivateparty Boolean?
+}
+
+model partyboss {
+  id              Int       @id @default(autoincrement())
+  charid          Int?
+  orderid         Int?
+  bossname        String?   @db.VarChar(255)
+  difficulty      Int?
+  attempt         Int?
+  lastattempttime DateTime?
+}
+
+model partymembers {
+  id       Int      @id @default(autoincrement())
+  partyid  Int?
+  charid   Int?
+  name     String?  @db.VarChar(255)
+  job      Int?
+  subJob   Int?
+  level    Int?
+  channel  Int?
+  fieldid  Int?
+  loggedin Boolean?
+
+  @@index([partyid], map: "partyid")
+}
+
+model petids {
+  id    Int  @id @default(autoincrement())
+  alid  Int?
+  petid Int?
+
+  @@index([alid], map: "alid")
+}
+
+model petitems {
+  itemid        BigInt    @id
+  name          String?   @db.VarChar(255)
+  level         Int?      @db.TinyInt
+  tameness      Int?      @db.SmallInt
+  repleteness   Int?      @db.TinyInt
+  petattribute  Int?      @db.SmallInt
+  petskill      Int?
+  datedead      DateTime?
+  remainlife    Int?
+  attribute     Int?      @db.SmallInt
+  activestate   Int?      @db.TinyInt
+  autobuffskill Int?
+  pethue        Int?
+  giantrate     Int?      @db.SmallInt
+  exceptionList String?   @db.VarChar(255)
+}
+
+model questlists {
+  questlist_id    BigInt  @id @default(autoincrement())
+  questmanager_id BigInt?
+  questid         Int?
+  fk_questid      BigInt?
+
+  @@index([fk_questid], map: "fk_questid")
+  @@index([questmanager_id], map: "questmanager_id")
+}
+
+model questmanagers {
+  id BigInt @id @default(autoincrement())
+}
+
+model questprogressrequirements {
+  id            BigInt  @id @default(autoincrement())
+  orderNum      Int?
+  progresstype  String? @db.VarChar(255)
+  questid       BigInt?
+  unitid        Int?
+  requiredcount Int?
+  currentcount  Int?
+
+  @@index([questid], map: "questid")
+}
+
+model quests {
+  id            BigInt    @id @default(autoincrement())
+  qrkey         Int?
+  qrvalue       String?   @db.VarChar(255)
+  status        Int?
+  completedtime DateTime?
+  expireterm    DateTime?
+}
+
+model rewardinfo {
+  id             Int       @id @default(autoincrement())
+  charid         Int       @default(0)
+  charname       String    @db.VarChar(255)
+  rewardItemType Boolean
+  itemID         Int       @default(0)
+  quantity       Int       @default(0)
+  maplePoint     Int       @default(0)
+  meso           Int       @default(0)
+  level          Int       @default(0)
+  exp            Int       @default(0)
+  description    String    @db.VarChar(255)
+  starttime      DateTime?
+  endtime        DateTime?
+}
+
+model shopitems {
+  id             BigInt    @id @default(autoincrement())
+  shopid         Int?
+  itemid         Int?
+  price          Int?      @default(0)
+  tokenitemid    Int?      @default(0)
+  tokenprice     Int?      @default(0)
+  pointquestid   Int?      @default(0)
+  pointprice     Int?      @default(0)
+  starcoin       Int?      @default(0)
+  questexid      Int?      @default(0)
+  questexkey     String?   @db.VarChar(255)
+  questexvalue   Int?      @default(0)
+  itemperiod     Int?      @default(0)
+  levellimited   Int?      @default(0)
+  showlevmin     Int?      @default(0)
+  showlevmax     Int?      @default(0)
+  questid        Int?      @default(0)
+  sellstart      DateTime? @default(dbgenerated("'1970-01-01 00:00:01.000'"))
+  sellend        DateTime? @default(dbgenerated("'9999-01-01 00:00:01.000'"))
+  tabindex       Int?
+  worldblock     Boolean?
+  potentialgrade Int?
+  buylimit       Int?
+  quantity       Int?      @db.SmallInt
+  unitprice      BigInt?   @default(0)
+  maxperslot     Int?      @default(9999) @db.SmallInt
+  discountperc   Int?      @default(0)
+}
+
+model skillcooltimes {
+  id             Int     @id @default(autoincrement())
+  charid         Int?
+  skillid        Int?
+  nextusabletime BigInt?
+
+  @@index([charid], map: "charid")
+}
+
+model skills {
+  id           Int  @id @default(autoincrement())
+  charid       Int?
+  skillid      Int?
+  rootid       Int?
+  maxlevel     Int?
+  currentlevel Int?
+  masterlevel  Int?
+
+  @@index([charid], map: "charid")
+}
+
+model spset {
+  id          Int  @id @default(autoincrement())
+  extendsp_id Int?
+  joblevel    Int? @db.TinyInt
+  sp          Int?
+
+  @@index([extendsp_id], map: "extendsp_id")
+}
+
+model stolenskills {
+  id        Int  @id @default(autoincrement())
+  charid    Int?
+  skillid   Int?
+  position  Int?
+  currentlv Int? @db.TinyInt
+
+  @@index([charid], map: "charid")
+}
+
+model systemtimes {
+  id   Int  @id @default(autoincrement())
+  yr   Int?
+  mnth Int?
+}
+
+model totems {
+  id      Int  @id @default(autoincrement())
+  alid    Int?
+  totemid Int?
+
+  @@index([alid], map: "alid")
+}
+
+model trunks {
+  id        Int     @id @default(autoincrement())
+  slotcount Int?    @default(4) @db.TinyInt
+  money     BigInt?
+}
+
+model unseenequips {
+  id      Int  @id @default(autoincrement())
+  alid    Int?
+  equipid Int?
+
+  @@index([alid], map: "alid")
+}
+
+model users {
+  id                   Int       @id @default(autoincrement())
+  name                 String?   @db.VarChar(255)
+  password             String?   @db.VarChar(255)
+  pic                  String?   @db.VarChar(255)
+  email                String?   @db.VarChar(255)
+  age                  Int?      @default(0)
+  accounttype          Int?      @default(0)
+  votepoints           Int?      @default(0)
+  donationpoints       Int?      @default(0)
+  maplePoints          Int?      @default(0)
+  nxPrepaid            Int?      @default(0)
+  clientstate          Int?      @default(0) @db.TinyInt
+  vipgrade             Int?      @default(0)
+  vippoints            Int?      @default(0)
+  freevippointdate     DateTime?
+  vipexpireddate       DateTime?
+  nblockreason         Int?      @default(0)
+  banExpireDate        DateTime?
+  banReason            String?   @db.VarChar(255)
+  offensemanager       Int?
+  gender               Int?      @default(0) @db.TinyInt
+  msg2                 Int?      @default(0) @db.TinyInt
+  purchaseexp          Int?      @default(0) @db.TinyInt
+  pblockreason         Int?      @default(3) @db.TinyInt
+  chatunblockdate      BigInt?   @default(0)
+  hascensorednxloginid Boolean?  @default(false)
+  gradecode            Int?      @default(0) @db.TinyInt
+  censorednxloginid    String?   @db.VarChar(255)
+  characterslots       Int       @default(32)
+  creationdate         DateTime?
+  bosspoints           Int       @default(0)
+  lastvote1            Int       @default(0)
+  lastvote2            Int       @default(0)
+  claimvote1           Int       @default(0)
+  claimvote2           Int       @default(0)
+  dojop                Int       @default(0)
+  lastvotetime         DateTime? @default(now()) @db.Timestamp(0)
+  lastvoteip           String?   @db.VarChar(64)
+  discordid            String?   @db.VarChar(18)
+
+  @@index([offensemanager], map: "offensemanager")
+}

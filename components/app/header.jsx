@@ -2,11 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {Dialog, DialogContent, DialogHeader, DialogTitle} from "../ui/dialog";
+import {Dialog, DialogContent, DialogDescription, DialogHeader} from "../ui/dialog";
 import {useState} from "react";
+import {Button} from "../ui/button";
+import {Input} from "../ui/input";
+import RegisterUser from "../actions/register";
 
 export default function Header(props) {
-    const [openVote, setOpenVote] = useState(false);
+    const [usernameStr, setUsernameStr] = useState('');
+    const [passwordStr, setPasswordStr] = useState('');
+    const [open, setOpen] = useState(false);
 
     return (
         <header {...props}>
@@ -19,7 +24,7 @@ export default function Header(props) {
                     href="https://discord.gg/BWq9u2t8rq"
                     className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
                     prefetch={false}
-                    style={{ textDecorationColor: `#E2BC44`, textDecorationThickness: `3px` }}
+                    style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}
                 >
                     <h5 className="text-center text-white" style={{
                         textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
@@ -29,7 +34,7 @@ export default function Header(props) {
                       className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
                       prefetch={false}
                       onClick={() => alert("Type @vote in game to vote!")}
-                      style={{ textDecorationColor: `#E2BC44`, textDecorationThickness: `3px` }}
+                      style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}
                 >
                     <h5 className="text-center text-white" style={{
                         textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
@@ -37,12 +42,32 @@ export default function Header(props) {
                 </Link>
                 <Link href="#" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
                       prefetch={false}
-                      onClick={() => alert("You can auto-register through the client!")}
-                      style={{ textDecorationColor: `#E2BC44`, textDecorationThickness: `3px` }}>
+                      onClick={() => setOpen(true)}
+                      style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}>
                     <h5 className="text-center text-white" style={{
                         textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
                     }}>REGISTER</h5>
                 </Link>
+                <Dialog open={open} onOpenChange={setOpen}>
+                    <DialogContent className="bg-white content-center text-center">
+                        <DialogDescription>
+                            <Input type="text" placeholder="Username" value={usernameStr} onChange={(ev) => setUsernameStr(ev.target.value)}/>
+                            <Input type="password" placeholder="Password" className="mt-2 mb-2" value={passwordStr} onChange={(ev) => setPasswordStr(ev.target.value)}/>
+                            <Button className="rounded-lg bg-white border-black border-[1px]" onClick={() => {
+                                RegisterUser(usernameStr, passwordStr)
+                                    .then(success => {
+                                        setOpen(false);
+
+                                        if (success) {
+                                            alert('You have registered successfully!')
+                                        } else {
+                                            alert('You have failed to register!')
+                                        }
+                                    });
+                            }}>Register</Button>
+                        </DialogDescription>
+                    </DialogContent>
+                </Dialog>
             </nav>
         </header>
     )
