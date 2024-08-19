@@ -23,7 +23,7 @@ export default function ServerInformation(props) {
     return (
         <Card {...props}>
             <CardHeader className="bg-primary">
-                <CardTitle className="fortuna-header flex">
+                <CardTitle className="fortuna-header">
                     SERVER INFORMATION
                 </CardTitle>
             </CardHeader>
