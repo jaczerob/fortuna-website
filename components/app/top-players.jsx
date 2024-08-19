@@ -21,7 +21,6 @@ export default function TopPlayers(props) {
         let mounted = true;
         GetTopPlayers()
             .then(rankings => {
-                console.log(rankings)
                 setRankings(rankings);
             })
             .catch(err => console.log(err.message));
