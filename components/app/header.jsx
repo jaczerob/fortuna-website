@@ -65,10 +65,11 @@ function UnauthenticatedLinks(props) {
                 }}>CREATE ACCOUNT</h5>
             </Link>
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className="bg-white content-center text-center">
-                    <DialogDescription>
-                        To create an account, you first need to authenticate through Discord<br/><br/>
-                        <Button onClick={() => signIn('discord', null, { prompt: 'none' })} className="rounded-lg bg-white hover:underline underline-offset-4 border-black mt-2">Authenticate</Button>
+                <DialogContent className="bg-white">
+                    <DialogDescription className="mt-4 text-center">
+                        <p className="text-justify">For an added layer of security, we request that you authorize through Discord before creating an account. The only information we store is your Discord account ID which we will associate with your account.</p><br/>
+                        <p className="text-justify">Press the below link to authenticate and then click Create Account again to create your account.</p><br/>
+                        <Button onClick={() => signIn('discord', null, { prompt: 'none' })} className="rounded-lg bg-white hover:underline hover:bg-white underline-offset-4 text-center">Authenticate through Discord</Button>
                     </DialogDescription>
                 </DialogContent>
             </Dialog>
@@ -114,8 +115,8 @@ function AuthenticatedLinks(props) {
             </Link>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="bg-white content-center text-center">
-                    <DialogDescription>
-                        <Input type="text" placeholder="Username" value={usernameStr} className="mt-4"
+                    <DialogDescription className="mt-4">
+                        <Input type="text" placeholder="Username" value={usernameStr}
                                onChange={(ev) => setUsernameStr(ev.target.value)}/>
                         <Input type="password" placeholder="Password" className="mt-2 mb-2" value={passwordStr}
                                onChange={(ev) => setPasswordStr(ev.target.value)}/>

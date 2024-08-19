@@ -37,7 +37,7 @@ export default function TopPlayers(props) {
             <CardContent className="grid gap-4 mt-3">
                 <Table className="border">
                     <TableHeader className="border">
-                        <TableRow>
+                        <TableRow className="hover:bg-transparent">
                             <TableHead className="border">Rank</TableHead>
                             <TableHead className="border">Name</TableHead>
                             <TableHead className="border">Level</TableHead>
@@ -70,7 +70,7 @@ function SkeletonPlayer(props) {
 
 function Player(props) {
     return (
-        <TableRow>
+        <TableRow className="hover:bg-transparent">
             <TableCell className="border">{props.rank}</TableCell>
             <TableCell className="border">{props.name}</TableCell>
             <TableCell className="border">{props.level}</TableCell>

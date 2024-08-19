@@ -30,19 +30,19 @@ export default function ServerInformation(props) {
             <CardContent className="grid gap-4">
                 <Table>
                     <TableBody>
-                        <TableRow>
+                        <TableRow className="hover:bg-transparent">
                             <TableCell className="font-medium"><MesoBagIcon
                                 className="h-12 w-12"/></TableCell>
                             <TableCell className="font-medium">Server Status</TableCell>
                             <TableCell className="text-left">{serverStatistics != null ? 'Online': 'Offline'}</TableCell>
                         </TableRow>
-                        <TableRow>
+                        <TableRow className="hover:bg-transparent">
                             <TableCell className="font-medium min-w-[100px]"><MesoBagIcon
                                 className="h-12 w-12"/></TableCell>
                             <TableCell className="font-medium">Players Online</TableCell>
                             <TableCell className="text-left">{serverStatistics != null ? serverStatistics.unique : '0'}</TableCell>
                         </TableRow>
-                        <TableRow>
+                        <TableRow className="hover:bg-transparent">
                             <TableCell className="font-medium"><MesoBagIcon
                                 className="h-12 w-12"/></TableCell>
                             <TableCell className="font-medium">Rates</TableCell>
