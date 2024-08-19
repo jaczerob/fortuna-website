@@ -68,7 +68,7 @@ function UnauthenticatedLinks(props) {
                 <DialogContent className="bg-white content-center text-center">
                     <DialogDescription>
                         To create an account, you first need to authenticate through Discord<br/><br/>
-                        <Button onClick={() => signIn()} className="rounded-lg bg-white hover:underline underline-offset-4 border-black mt-2">Authenticate</Button>
+                        <Button onClick={() => signIn('discord', null, { prompt: 'none' })} className="rounded-lg bg-white hover:underline underline-offset-4 border-black mt-2">Authenticate</Button>
                     </DialogDescription>
                 </DialogContent>
             </Dialog>
