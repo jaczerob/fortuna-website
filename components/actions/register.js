@@ -9,11 +9,11 @@ const usernameRegex = /^[A-Za-z0-9]+$/;
 
 export default async function RegisterUser(usernameStr, passwordStr, discordIDStr) {
     if (isNullOrEmpty(usernameStr) || isNullOrEmpty(passwordStr)) {
-        throw Error('Username or password cannot be empty')
+        return 'Username or password cannot be empty';
     } else if (!passwordRegex.test(passwordStr)) {
-        throw Error('Password must be 8+ characters and only contain letters or numbers')
+        return 'Password must be 8+ characters and only contain letters or numbers';
     } else if (!usernameRegex.test(usernameStr)) {
-        throw Error('Username must only contain letters or numbers')
+        return 'Username must only contain letters or numbers';
     }
 
     let salt = bcrypt.genSaltSync(10, 'a');
@@ -31,15 +31,17 @@ export default async function RegisterUser(usernameStr, passwordStr, discordIDSt
                 discordid: discordIDStr
             }
         });
+        return 'Successfully registered!'
     } catch (e) {
         if (e instanceof PrismaClientKnownRequestError) {
             // The .code property can be accessed in a type-safe manner
             if (e.code === 'P2002') {
-                throw Error('User already exists');
+                return 'User already exists'
             }
         }
 
-        throw e;
+        console.error(e);
+        return 'Unknown error'
     }
 }
 

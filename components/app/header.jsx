@@ -100,9 +100,7 @@ function AuthenticatedLinks(props) {
                                onChange={(ev) => setPasswordStr(ev.target.value)}/>
                         <Button className="rounded-lg bg-white border-black border-[1px]" onClick={() => {
                             RegisterUser(usernameStr, passwordStr, props.discordId)
-                                .then(_ => {
-                                    alert('Successfully registered');
-                                })
+                                .then(response => alert(response))
                                 .catch(error => {
                                     alert(error.message);
                                 })
