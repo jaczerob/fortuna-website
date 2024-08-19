@@ -5,6 +5,7 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "../
 import {useEffect, useState} from "react";
 import {Skeleton} from "../ui/skeleton";
 import {randomUUID} from "crypto";
+import GetTopPlayers from "../actions/top-players";
 
 export default function TopPlayers(props) {
     const [rankings, setRankings] = useState([]);
@@ -18,11 +19,10 @@ export default function TopPlayers(props) {
 
     useEffect(() => {
         let mounted = true;
-        fetch('https://api.fortunams.org:8080/api/server/rankings')
-            .then(response => response.json())
-            .then(json => {
-                console.log(json);
-                setRankings(json.rankings);
+        GetTopPlayers()
+            .then(rankings => {
+                console.log(rankings)
+                setRankings(rankings);
             })
             .catch(err => console.log(err.message));
 
@@ -44,9 +44,9 @@ export default function TopPlayers(props) {
                         </TableRow>
                     </TableHeader>
                     <TableBody className="border">
-                        { rankings != null && rankings.length !== 0 ? rankings.map(player => {
+                        { rankings != null && rankings.length !== 0 ? rankings.map((player, i) => {
                             return (
-                                <Player key={player.name} rank={player.rank} name={player.name} level={player.level}/>
+                                <Player key={player.name} rank={i + 1} name={player.name} level={player.level}/>
                             )
                         }) : placeHolderPlayers.map(player => {
                             return (
@@ -76,14 +76,4 @@ function Player(props) {
             <TableCell className="border">{props.level}</TableCell>
         </TableRow>
     );
-}
-
-async function fetchPlayers() {
-    const response= await fetch('http://95.216.153.56:8080/server/rankings');
-    if (!response.ok) {
-        response.text().then(console.error);
-        return null;
-    }
-
-    return await response.json();
 }
