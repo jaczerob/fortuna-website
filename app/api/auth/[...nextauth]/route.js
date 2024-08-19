@@ -5,7 +5,7 @@ const handler = NextAuth({
     providers: [
         DiscordProvider({
             clientId: process.env.CLIENT_ID,
-            clientSecret: process.env.CLIENT_SECRET
+            clientSecret: process.env.CLIENT_SECRET,
         }),
     ],
     callbacks: {

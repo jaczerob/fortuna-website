@@ -1,9 +1,9 @@
 "use server"
 
-import { PrismaClient, PrismaClientKnownRequestError } from "../generated/client-mysql";
+import { PrismaClientKnownRequestError } from "../generated/client-mysql";
+import prisma from "../../db";
 import bcrypt from "bcrypt";
 
-const mysqlClient = new PrismaClient();
 const passwordRegex = /^[A-Za-z0-9]{8,}$/;
 const usernameRegex = /^[A-Za-z0-9]+$/;
 
@@ -20,7 +20,7 @@ export default async function RegisterUser(usernameStr, passwordStr, discordIDSt
     let hash = bcrypt.hashSync(passwordStr, salt);
 
     try {
-        await mysqlClient.users.create({
+        await prisma.users.create({
             data: {
                 name: usernameStr,
                 password: hash,
