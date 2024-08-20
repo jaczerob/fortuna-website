@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output = "../components/generated/client-mysql"
+  output   = "../components/generated/client-mysql"
 }
 
 datasource db {
@@ -157,9 +157,10 @@ model cashiteminfos {
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model charactercards {
-  accid       Int? @db.UnsignedInt
+  id          Int  @id @default(autoincrement())
   characterid Int?
-  position    Int?
+  job         Int?
+  level       Int? @db.TinyInt
 
   @@ignore
 }
@@ -199,6 +200,16 @@ model characters {
   onlineDay         Int?    @default(0)
   onlineTime        BigInt? @default(0)
   quickslotKeys     String? @db.VarChar(255)
+  carousleEXP       Int?    @default(0)
+  carousleEXP2      Int?    @default(0)
+  carousleEXP3      Int?    @default(0)
+  nebulite          Int     @default(3063000)
+  nebulitepos       Int     @default(0)
+  name              String? @db.VarChar(255)
+  cpoints           Int     @default(0)
+  shipExperience    Int?    @default(0)
+  dojoPoints        BigInt? @default(0)
+  lastLDinMS        BigInt  @default(0)
 
   @@index([avatardata], map: "avatardata")
   @@index([cashinventory], map: "cashinventory")
@@ -267,7 +278,7 @@ model characterstats {
   albastarttime         DateTime?
   albaduration          Int?
   albaspecialreward     Int?
-  burning               Boolean?
+  burning               Int?      @db.TinyInt
   charactercard         Int?
   accountlastlogout     Int?
   lastlogout            DateTime?
@@ -276,6 +287,11 @@ model characterstats {
   nextavailablefametime DateTime?
   node_shards           Int       @default(0)
   maxfriends            Int       @default(0)
+  gm                    Int       @default(0)
+  Hair1                 Int?
+  Hair2                 Int?
+  Hair3                 Int?
+  accid                 Int?
 
   @@index([accountlastlogout], map: "accountlastlogout")
   @@index([charactercard], map: "charactercard")
@@ -378,7 +394,7 @@ model equips {
   serialnumber         BigInt?
   itemid               BigInt    @id
   title                String?   @db.VarChar(255)
-  equippeddate         DateTime?
+  equippeddate         DateTime? @db.DateTime(0)
   prevbonusexprate     Int?
   options              String?   @db.VarChar(255)
   sockets              String?   @db.VarChar(255)
@@ -389,9 +405,9 @@ model equips {
   iint                 Int?      @db.SmallInt
   iluk                 Int?      @db.SmallInt
   imaxhp               Int?      @db.SmallInt
-  imaxhpr              Int       @db.SmallInt
+  imaxhpr              Int?      @db.SmallInt
   imaxmp               Int?      @db.SmallInt
-  imaxmpr              Int       @db.SmallInt
+  imaxmpr              Int?      @db.SmallInt
   ipad                 Int?      @db.SmallInt
   imad                 Int?      @db.SmallInt
   ipdd                 Int?      @db.SmallInt
@@ -401,7 +417,6 @@ model equips {
   icraft               Int?      @db.SmallInt
   ispeed               Int?      @db.SmallInt
   ijump                Int?      @db.SmallInt
-  arcaneid             BigInt?
   attribute            Int?      @db.SmallInt
   leveluptype          Int?      @db.SmallInt
   level                Int?      @db.SmallInt
@@ -453,7 +468,6 @@ model equips {
   nopotential          Int?      @db.TinyInt
   bossreward           Int?      @db.TinyInt
   superioreqp          Int?      @db.TinyInt
-  flameid              BigInt?
   android              Int?
   androidgrade         Int?
   arcane_stat          Int?      @default(0) @db.SmallInt
@@ -657,6 +671,7 @@ model items {
   obtainedonce         Boolean?  @default(false)
   zeroShareItemID      BigInt    @default(0)
   attribute            Int?      @default(0) @db.SmallInt
+  characterid          Int?      @default(0)
 }
 
 model itemsbuylimit {
@@ -794,9 +809,7 @@ model monster_collection_session_rewards {
 }
 
 model monster_collections {
-  id         Int @id @default(autoincrement())
-  templateid Int @default(0)
-  accid      Int @default(0)
+  id Int @id @default(autoincrement())
 }
 
 model monsterbookcards {
@@ -1065,13 +1078,15 @@ model unseenequips {
 
 model users {
   id                   Int       @id @default(autoincrement())
-  name                 String?   @db.VarChar(255)
+  name                 String?   @unique(map: "name") @db.VarChar(255)
   password             String?   @db.VarChar(255)
   pic                  String?   @db.VarChar(255)
   email                String?   @db.VarChar(255)
   age                  Int?      @default(0)
   accounttype          Int?      @default(0)
   votepoints           Int?      @default(0)
+  bosspoints           Int?      @default(0)
+  dojop                Int?      @default(0)
   donationpoints       Int?      @default(0)
   maplePoints          Int?      @default(0)
   nxPrepaid            Int?      @default(0)
@@ -1092,17 +1107,142 @@ model users {
   hascensorednxloginid Boolean?  @default(false)
   gradecode            Int?      @default(0) @db.TinyInt
   censorednxloginid    String?   @db.VarChar(255)
-  characterslots       Int       @default(32)
+  characterslots       Int?      @default(4)
   creationdate         DateTime?
-  bosspoints           Int       @default(0)
-  lastvote1            Int       @default(0)
-  lastvote2            Int       @default(0)
-  claimvote1           Int       @default(0)
-  claimvote2           Int       @default(0)
-  dojop                Int       @default(0)
+  rootAbyssQueenCount  Int?      @default(0)
+  rootAbyssPierreCount Int?      @default(0)
+  rootAbyssVonBonCount Int?      @default(0)
+  rootAbyssVellumCount Int?      @default(0)
+  apiuser              String?   @db.VarChar(45)
+  birthday             DateTime  @default(dbgenerated("'1000-01-01'")) @db.Date
+  webadmin             Int       @default(0)
   lastvotetime         DateTime? @default(now()) @db.Timestamp(0)
   lastvoteip           String?   @db.VarChar(64)
-  discordid            String?   @db.VarChar(18)
+  hwid                 String?   @db.VarChar(255)
+  packageA             Int?      @default(0)
+  packageB             Int?      @default(0)
+  packageC             Int?      @default(0)
+  packageD             Int?      @default(0)
+  packageE             Int?      @default(0)
+  interactStatus       Int?      @default(0)
+  packageF             Int?      @default(0)
+  packageG             Int?      @default(0)
+  packageH             Int?      @default(0)
+  packageI             Int?      @default(0)
+  packageJ             Int?      @default(0)
+  discordid            String?   @db.VarChar(32)
 
   @@index([offensemanager], map: "offensemanager")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model character_cards {
+  accid       Int @db.UnsignedInt
+  worldid     Int
+  characterid Int
+  position    Int
+
+  @@ignore
+}
+
+model couplerecords {
+  id          Int     @id @default(autoincrement())
+  type        Int?
+  status      Int?
+  itemid      Int?
+  charid      Int?
+  partnerid   Int?
+  charname    String? @db.VarChar(255)
+  partnername String? @db.VarChar(255)
+  charsn      BigInt?
+  partnersn   BigInt?
+}
+
+model cs_gifts {
+  id          Int     @id @default(autoincrement())
+  cashitemid  BigInt
+  receiverid  Int
+  sendername  String? @db.VarChar(255)
+  giftmessage String? @db.VarChar(255)
+}
+
+model dailycoin {
+  id         Int  @id @default(autoincrement())
+  charid     Int?
+  capreached Int?
+}
+
+model dummytable {
+  check   BigInt
+  checkID String @id @db.VarChar(255)
+}
+
+model eventscooltimes {
+  id            Int     @id @default(autoincrement())
+  accid         Int?
+  eventType     Int?
+  amountDone    Int?
+  nextresettime BigInt?
+
+  @@index([accid], map: "accid")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model favorites {
+  accountid Int
+  sn        Int
+
+  @@ignore
+}
+
+model hwid {
+  hwidbanid Int     @id @default(autoincrement())
+  hwid      String? @default("") @db.VarChar(255)
+}
+
+model parttime {
+  id     Int     @id @default(autoincrement())
+  cid    Int
+  job    Boolean @default(false)
+  time   BigInt  @default(0)
+  reward Int     @default(0)
+}
+
+model slider {
+  id  Int     @id @default(autoincrement()) @db.UnsignedInt
+  url String  @db.VarChar(200)
+  alt String? @db.VarChar(200)
+}
+
+model statics {
+  id      Int     @id @default(autoincrement())
+  subject String? @db.Text
+  text    String  @db.Text
+  link    String  @db.VarChar(200)
+  rank    Int
+}
+
+model wz_itemdata {
+  itemid        Int     @id
+  name          String? @db.TinyText
+  msg           String? @db.VarChar(4096)
+  desc          String? @db.VarChar(4096)
+  slotMax       Int     @default(1) @db.SmallInt
+  price         String  @default("-1.0") @db.VarChar(255)
+  wholePrice    Int     @default(-1)
+  stateChange   Int     @default(0)
+  flags         Int     @default(0) @db.SmallInt
+  karma         Boolean @default(false)
+  meso          Int     @default(0)
+  monsterBook   Int     @default(0)
+  itemMakeLevel Int     @default(0) @db.SmallInt
+  questId       Int     @default(0)
+  scrollReqs    String? @db.VarChar(4096)
+  consumeItem   String? @db.TinyText
+  totalprob     Int     @default(0)
+  incSkill      String  @default("") @db.VarChar(255)
+  replaceid     Int     @default(0)
+  replacemsg    String  @default("") @db.VarChar(255)
+  create        Int     @default(0)
+  afterImage    String  @default("") @db.VarChar(255)
 }
