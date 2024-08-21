@@ -4,7 +4,7 @@
 import prisma from "../../db";
 
 export default async function GetTopPlayers() {
-    return prisma.$queryRaw`SELECT cs.id, cs.name, cs.level, cs.job, u.accounttype, u.name
+    return prisma.$queryRaw`SELECT cs.id, cs.name, cs.level, cs.job
                             FROM characterstats cs,
                                  characters c,
                                  users u,
