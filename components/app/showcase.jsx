@@ -41,38 +41,6 @@ function Images(props) {
                 className="object-cover"
                 style={{objectFit: "cover"}}
             />
-            <video
-                muted={true}
-                autoPlay={true}
-                controls
-                loop
-            >
-                <source src="/Magnus.mp4" type="video/mp4"/>
-            </video>
-            <video
-                muted={true}
-                autoPlay={true}
-                controls
-                loop
-            >
-                <source src="/auction_house.mp4" type="video/mp4"/>
-            </video>
-            <video
-                muted={true}
-                autoPlay={true}
-                controls
-                loop
-            >
-                <source src="/Pgach2.mp4" type="video/mp4"/>
-            </video>
-            <video
-                muted={true}
-                autoPlay={true}
-                controls
-                loop
-            >
-                <source src="/surprise_style_nx_box.mp4" type="video/mp4"/>
-            </video>
         </div>
     )
 }
