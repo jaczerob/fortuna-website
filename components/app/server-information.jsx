@@ -4,16 +4,19 @@ import {Card, CardContent, CardHeader, CardTitle} from "../ui/card";
 import {Table, TableBody, TableCell, TableRow} from "../ui/table";
 import {MesoBagIcon} from "./icons";
 import {useEffect, useState} from "react";
+import GetOnlinePlayers from "../actions/online-players";
+
+BigInt.prototype.toJSON = function() { return this.toString() }
 
 export default function ServerInformation(props) {
-    const [serverStatistics, setServerStatistics] = useState({});
+    const [onlineCount, setOnlineCount] = useState(0);
     useEffect(() => {
         let mounted = true;
-        fetch('https://api.fortunams.org:8080/api/server/statistics')
-            .then(response => response.json())
-            .then(json => {
-                console.log(json);
-                setServerStatistics(json.onlineCount);
+        GetOnlinePlayers()
+            .then(response => {
+                const count = response[0].count
+                console.log(`got online count: ${count}`)
+                setOnlineCount(count);
             })
             .catch(err => console.log(err.message));
 
@@ -31,16 +34,10 @@ export default function ServerInformation(props) {
                 <Table>
                     <TableBody>
                         <TableRow className="hover:bg-transparent">
-                            <TableCell className="font-medium"><MesoBagIcon
-                                className="h-12 w-12"/></TableCell>
-                            <TableCell className="font-medium">Server Status</TableCell>
-                            <TableCell className="text-left">{serverStatistics != null ? 'Online': 'Offline'}</TableCell>
-                        </TableRow>
-                        <TableRow className="hover:bg-transparent">
                             <TableCell className="font-medium min-w-[100px]"><MesoBagIcon
                                 className="h-12 w-12"/></TableCell>
                             <TableCell className="font-medium">Players Online</TableCell>
-                            <TableCell className="text-left">{serverStatistics != null ? serverStatistics.unique : '0'}</TableCell>
+                            <TableCell className="text-left">{onlineCount != null ? onlineCount : '0'}</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-transparent">
                             <TableCell className="font-medium"><MesoBagIcon
