@@ -4,17 +4,16 @@ import {Card, CardContent, CardHeader, CardTitle} from "../ui/card";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "../ui/table";
 import {useEffect, useState} from "react";
 import {Skeleton} from "../ui/skeleton";
-import {randomUUID} from "crypto";
 import GetTopPlayers from "../actions/top-players";
 
 export default function TopPlayers(props) {
     const [rankings, setRankings] = useState([]);
     const placeHolderPlayers = [
-        { name: '', rank: '1', level: '' },
-        { name: '', rank: '2', level: '' },
-        { name: '', rank: '3', level: '' },
-        { name: '', rank: '4', level: '' },
-        { name: '', rank: '5', level: '' },
+        {name: '', rank: '1', level: ''},
+        {name: '', rank: '2', level: ''},
+        {name: '', rank: '3', level: ''},
+        {name: '', rank: '4', level: ''},
+        {name: '', rank: '5', level: ''},
     ]
 
     useEffect(() => {
@@ -43,13 +42,13 @@ export default function TopPlayers(props) {
                         </TableRow>
                     </TableHeader>
                     <TableBody className="border">
-                        { rankings != null && rankings.length !== 0 ? rankings.map((player, i) => {
+                        {rankings != null && rankings.length !== 0 ? rankings.map((player, i) => {
                             return (
                                 <Player key={player.name} rank={i + 1} name={player.name} level={player.level}/>
                             )
                         }) : placeHolderPlayers.map(player => {
                             return (
-                                <SkeletonPlayer key={player.rank} className="w-[100px] h-[20px] rounded-full" />
+                                <SkeletonPlayer key={player.rank} className="w-[100px] h-[20px] rounded-full"/>
                             )
                         })}
                     </TableBody>
