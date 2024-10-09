@@ -12,6 +12,7 @@ import {signIn, useSession} from "next-auth/react";
 export default function Header(props) {
     const {data: session, status} = useSession();
     const id = session?.user?.id;
+    const isAdmin = session?.user?.isAdmin || false;
 
     return (
         <header {...props}>
@@ -21,6 +22,7 @@ export default function Header(props) {
             {
                 status === 'authenticated' ?
                     <AuthenticatedLinks discordId={id}
+                                        admin={isAdmin}
                                         className="md:flex gap-4 mt-6 items-center justify-center h-16 grid-cols-2 grid"/> :
                     <UnauthenticatedLinks
                         className="md:flex gap-4 mt-6 items-center justify-center h-16 grid-cols-2 grid"/>
@@ -112,6 +114,14 @@ function AuthenticatedLinks(props) {
                 <h5 className="text-center text-white" style={{
                     textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
                 }}>CREATE ACCOUNT</h5>
+            </Link>
+            <Link href="#" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
+                  prefetch={false}
+                  onClick={() => window.open('/admin', '_blank')}
+                  style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}>
+                <h5 className="text-center text-white" style={{
+                    textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
+                }}>ADMIN</h5>
             </Link>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="bg-white content-center text-center">
