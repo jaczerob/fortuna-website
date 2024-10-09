@@ -6,7 +6,10 @@ import {MesoBagIcon} from "./icons";
 import {useEffect, useState} from "react";
 import GetOnlinePlayers from "../actions/online-players";
 
-BigInt.prototype.toJSON = function() { return this.toString() }
+BigInt.prototype.toJSON = function () {
+    const int = Number.parseInt(this.toString());
+    return int ?? this.toString();
+};
 
 export default function ServerInformation(props) {
     const [onlineCount, setOnlineCount] = useState(0);
