@@ -37,13 +37,13 @@ export default function ServerInformation(props) {
                             <TableCell className="font-medium min-w-[100px]"><MesoBagIcon
                                 className="h-12 w-12"/></TableCell>
                             <TableCell className="font-medium">Players Online</TableCell>
-                            <TableCell className="text-left">{onlineCount != null ? onlineCount : '0'}</TableCell>
+                            <TableCell className="text-left">{onlineCount}</TableCell>
                         </TableRow>
                         <TableRow className="hover:bg-transparent">
                             <TableCell className="font-medium"><MesoBagIcon
                                 className="h-12 w-12"/></TableCell>
                             <TableCell className="font-medium">Rates</TableCell>
-                            <TableCell className="text-left">8x/3x/3x</TableCell>
+                            <TableCell className="text-left">8x/3x/2x</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
