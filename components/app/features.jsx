@@ -23,7 +23,7 @@ export default function Features(props) {
                 />
                 <Feature
                     title="BOSSES"
-                    description="All bosses fully functional up to Lucid and Will!"
+                    description="All bosses fully functional up to Lucid!"
                 />
                 <Feature
                     title="AUCTION HOUSE"
