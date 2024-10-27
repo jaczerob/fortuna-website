@@ -34,7 +34,7 @@ function Images(props) {
     return (
         <div {...props}>
             <Image
-                src="/showcase_1.png"
+                src="/qeqwq.png"
                 alt="Image 1"
                 width={1370}
                 height={797}
