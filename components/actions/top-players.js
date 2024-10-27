@@ -15,5 +15,5 @@ export default async function GetTopPlayers() {
                               AND u.accounttype = 0
                               AND (u.banExpireDate IS null OR u.banExpireDate <= NOW())
                             ORDER BY cs.level DESC
-                                LIMIT 5;`;
+                                LIMIT 10;`;
 }

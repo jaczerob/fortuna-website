@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import DiscordProvider from "next-auth/providers/discord"
-import IsAdmin from "../../../../components/actions/is-admin";
+import GetUserDetails from "../../../../components/actions/get-user-details";
 
 const handler = NextAuth({
     providers: [
@@ -16,13 +16,8 @@ const handler = NextAuth({
                     session.user.id = token.sub;
 
                     const id = Number.parseInt(session.user.id);
-                    if (!isNaN(id) && id !== 0) {
-                        session.user.isAdmin = await IsAdmin(id);
-                    } else {
-                        session.user.isAdmin = false;
-                    }
 
-                    console.log(`user is admin: ${session.user.isAdmin}`)
+                    session.account = await GetUserDetails(id);
                 }
             }
             return session;

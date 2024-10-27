@@ -10,7 +10,7 @@ import {Table, TableBody, TableCell, TableRow} from "../../components/ui/table";
 
 export default function Component() {
     const {data: session, status} = useSession();
-    const isAdmin = session?.user?.isAdmin || false;
+    const isAdmin = session?.account?.isAdmin || false;
     const [discordId, setDiscordId] = useState('');
     const [characterName, setCharacterName] = useState('');
     const [characters, setCharacters] = useState([]);

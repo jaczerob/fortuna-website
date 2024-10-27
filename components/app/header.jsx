@@ -12,7 +12,8 @@ import {signIn, useSession} from "next-auth/react";
 export default function Header(props) {
     const {data: session, status} = useSession();
     const id = session?.user?.id;
-    const isAdmin = session?.user?.isAdmin || false;
+    const isAdmin = session?.account?.isAdmin || false;
+    const voteUrl = session?.account?.voteUrl || '/';
 
     return (
         <header {...props}>
@@ -22,8 +23,10 @@ export default function Header(props) {
             {
                 status === 'authenticated' ?
                     <AuthenticatedLinks discordId={id}
-                                        admin={isAdmin}
-                                        className="md:flex gap-4 mt-6 items-center justify-center h-16 grid-cols-2 grid"/> :
+                                        isAdmin={isAdmin}
+                                        className="md:flex gap-4 mt-6 items-center justify-center h-16 grid-cols-2 grid"
+                                        voteUrl={voteUrl}
+                    /> :
                     <UnauthenticatedLinks
                         className="md:flex gap-4 mt-6 items-center justify-center h-16 grid-cols-2 grid"/>
             }
@@ -31,11 +34,11 @@ export default function Header(props) {
     )
 }
 
-function UnauthenticatedLinks(props) {
+function UnauthenticatedLinks({className}) {
     const [open, setOpen] = useState(false);
 
     return (
-        <nav {...props}>
+        <nav className={className}>
             <Link
                 target="_blank"
                 href="https://discord.gg/BWq9u2t8rq"
@@ -79,13 +82,13 @@ function UnauthenticatedLinks(props) {
     )
 }
 
-function AuthenticatedLinks(props) {
+function AuthenticatedLinks({discordId, isAdmin, className, voteUrl}) {
     const [usernameStr, setUsernameStr] = useState('');
     const [passwordStr, setPasswordStr] = useState('');
     const [open, setOpen] = useState(false);
 
     return (
-        <nav {...props}>
+        <nav className={className}>
             <Link
                 target="_blank"
                 href="https://discord.gg/BWq9u2t8rq"
@@ -100,7 +103,7 @@ function AuthenticatedLinks(props) {
             <Link href="#"
                   className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
                   prefetch={false}
-                  onClick={() => alert("Type @vote in game to vote!")}
+                  onClick={() => window.open(voteUrl, '_blank')}
                   style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}
             >
                 <h5 className="text-center text-white" style={{
@@ -115,14 +118,16 @@ function AuthenticatedLinks(props) {
                     textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
                 }}>CREATE ACCOUNT</h5>
             </Link>
-            <Link href="#" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
-                  prefetch={false}
-                  onClick={() => window.open('/admin', '_blank')}
-                  style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}>
-                <h5 className="text-center text-white" style={{
-                    textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
-                }}>ADMIN</h5>
-            </Link>
+            {
+                isAdmin ? <Link href="#" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
+                                prefetch={false}
+                                onClick={() => window.open('/admin', '_blank')}
+                                style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}>
+                    <h5 className="text-center text-white" style={{
+                        textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
+                    }}>ADMIN</h5>
+                </Link> : <div/>
+            }
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogContent className="bg-white content-center text-center">
                     <DialogDescription className="mt-4">
@@ -131,7 +136,7 @@ function AuthenticatedLinks(props) {
                         <Input type="password" placeholder="Password" className="mt-2 mb-2" value={passwordStr}
                                onChange={(ev) => setPasswordStr(ev.target.value)}/>
                         <Button className="rounded-lg bg-white border-black border-[1px]" onClick={() => {
-                            RegisterUser(usernameStr, passwordStr, props.discordId)
+                            RegisterUser(usernameStr, passwordStr, discordId)
                                 .then(response => alert(response))
                                 .catch(error => alert(error.message))
                                 .finally(() => setOpen(false));
