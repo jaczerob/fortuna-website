@@ -197,7 +197,9 @@ function AuthenticatedLinks({discordId, isAdmin, className, voteUrl}) {
                                     return (
                                         <Button key={i}
                                                 className="text-xl font-medium hover:underline underline-offset-4 pr-4 bg-white"
-                                                onClick={() => UnstuckUser(username, discordId)}
+                                                onClick={() => {
+                                                    UnstuckUser(username, discordId).then((_) => setOpenUnstuck(false))
+                                                }}
                                                 prefetch={false}
                                                 style={{
                                                     textDecorationColor: `#E2BC44`,
