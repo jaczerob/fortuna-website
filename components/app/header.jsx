@@ -63,6 +63,15 @@ function UnauthenticatedLinks({className}) {
             </Link>
             <Link href="#" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
                   prefetch={false}
+                  onClick={() => signIn('discord', null, {prompt: 'none'})}
+                  style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}
+            >
+                <h5 className="text-center text-white" style={{
+                    textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
+                }}>LOGIN</h5>
+            </Link>
+            <Link href="#" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
+                  prefetch={false}
                   onClick={() => setOpen(true)}
                   style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}
             >
