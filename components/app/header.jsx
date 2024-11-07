@@ -127,16 +127,16 @@ function AuthenticatedLinks({discordId, isAdmin, className, voteUrl}) {
                     textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
                 }}>VOTE</h5>
             </Link>
-            <Link href="#"
-                  className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
-                  prefetch={false}
-                  onClick={() => setOpenUnstuck(true)}
-                  style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}
-            >
-                <h5 className="text-center text-white" style={{
-                    textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`
-                }}>UNSTUCK</h5>
-            </Link>
+            {/*<Link href="#"*/}
+            {/*      className="text-3xl font-medium hover:underline underline-offset-4 pr-4"*/}
+            {/*      prefetch={false}*/}
+            {/*      onClick={() => setOpenUnstuck(true)}*/}
+            {/*      style={{textDecorationColor: `#E2BC44`, textDecorationThickness: `3px`}}*/}
+            {/*>*/}
+            {/*    <h5 className="text-center text-white" style={{*/}
+            {/*        textShadow: `3px 0 #E2BC44, -3px 0 #E2BC44, 0 3px #E2BC44, 0 -3px #E2BC44, 3px 3px #E2BC44, -3px -3px #E2BC44, 3px -3px #E2BC44, -3px 3px #E2BC44`*/}
+            {/*    }}>UNSTUCK</h5>*/}
+            {/*</Link>*/}
             <Link href="#" className="text-3xl font-medium hover:underline underline-offset-4 pr-4"
                   prefetch={false}
                   onClick={() => setOpen(true)}
@@ -196,33 +196,33 @@ function AuthenticatedLinks({discordId, isAdmin, className, voteUrl}) {
                     </DialogDescription>
                 </DialogContent>
             </Dialog>
-            <Dialog open={openUnstuck} onOpenChange={setOpenUnstuck}>
-                <DialogContent className="bg-white content-center text-center">
-                    <DialogDescription className="mt-4">
-                        <span>Click which account you want to unstuck, then unstuck through the client by typing unstuck in your password field</span><br/>
-                        {
-                            voteUrl.length > 0 ?
-                                voteUrl.map((username, i) => {
-                                    return (
-                                        <Button key={i}
-                                                className="text-xl font-medium hover:underline underline-offset-4 pr-4 bg-white"
-                                                onClick={() => {
-                                                    UnstuckUser(username, discordId).then((_) => setOpenUnstuck(false))
-                                                }}
-                                                prefetch={false}
-                                                style={{
-                                                    textDecorationColor: `#E2BC44`,
-                                                    textDecorationThickness: `3px`
-                                                }}>
-                                            Unstuck {username}
-                                        </Button>
-                                    )
-                                }) :
-                                <div>You have no accounts!</div>
-                        }
-                    </DialogDescription>
-                </DialogContent>
-            </Dialog>
+            {/*<Dialog open={openUnstuck} onOpenChange={setOpenUnstuck}>*/}
+            {/*    <DialogContent className="bg-white content-center text-center">*/}
+            {/*        <DialogDescription className="mt-4">*/}
+            {/*            <span>Click which account you want to unstuck, then unstuck through the client by typing unstuck in your password field</span><br/>*/}
+            {/*            {*/}
+            {/*                voteUrl.length > 0 ?*/}
+            {/*                    voteUrl.map((username, i) => {*/}
+            {/*                        return (*/}
+            {/*                            <Button key={i}*/}
+            {/*                                    className="text-xl font-medium hover:underline underline-offset-4 pr-4 bg-white"*/}
+            {/*                                    onClick={() => {*/}
+            {/*                                        UnstuckUser(username, discordId).then((_) => setOpenUnstuck(false))*/}
+            {/*                                    }}*/}
+            {/*                                    prefetch={false}*/}
+            {/*                                    style={{*/}
+            {/*                                        textDecorationColor: `#E2BC44`,*/}
+            {/*                                        textDecorationThickness: `3px`*/}
+            {/*                                    }}>*/}
+            {/*                                Unstuck {username}*/}
+            {/*                            </Button>*/}
+            {/*                        )*/}
+            {/*                    }) :*/}
+            {/*                    <div>You have no accounts!</div>*/}
+            {/*            }*/}
+            {/*        </DialogDescription>*/}
+            {/*    </DialogContent>*/}
+            {/*</Dialog>*/}
         </nav>
     )
 }
